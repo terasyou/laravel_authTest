@@ -28,6 +28,8 @@ Route::controller("user","UserController");
 //---------------------------------
 Route::controller("admin","AdminController");
 
+Route::when('admin/*','admin');
+
 /*
 |---------------------------------------------
 | usersテーブルの作成

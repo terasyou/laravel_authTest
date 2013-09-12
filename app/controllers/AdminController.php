@@ -21,12 +21,14 @@ class AdminController extends BaseController{
 	|------------------------------------
 	*/
 	public function getIndex(){
-		echo 'ようこそ'.Auth::user()->name.'さん<br>';
+		echo 'ようこそ'.Auth::admin()->name.'さん<br>';
 		echo '<h1>ユーザーのTOPページです。</h1>';
 		echo '<ul>';
 		echo '<li>'.HTML::link('/','サイトのTOP').'</li>';
 		echo '<li>'.HTML::link('admin/logout','ログアウト').'</li>';
 		echo '</ul>';
+
+		echo $name = Route::currentRouteName();
 	}
 	/*
 	|-----------------------------------
@@ -73,7 +75,6 @@ class AdminController extends BaseController{
 	public function getLogin(){
 		return View::make("admin/login");
 	}
-
 	public function postLogin(){
 		//受信データの整理
 		$inputs=Input::only('email','password');
@@ -114,6 +115,7 @@ class AdminController extends BaseController{
 	public function getTest(){
 		echo $html = HTML::link('user/test','公開ページ');
 		return "管理側専用ページになります。";
+		echo $name = Route::currentRouteName();
 	}
 }
 

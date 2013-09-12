@@ -27,8 +27,8 @@ class UserController extends BaseController{
 		echo '<li>'.HTML::link('/','サイトのTOP').'</li>';
 		echo '<li>'.HTML::link('user/logout','ログアウト').'</li>';
 		echo '</ul>';
-
 		echo $email = Auth::user()->email;
+		echo $name = Route::currentRouteName();
 	}
 	/*
 	|-----------------------------------

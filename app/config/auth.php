@@ -1,5 +1,8 @@
 <?php
 
+$model = "Admin";
+$table = "admins";
+
 return array(
 
 	/*
