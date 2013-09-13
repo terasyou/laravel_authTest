@@ -26,9 +26,9 @@ Route::controller("user","UserController");
 //---------------------------------
 //管理者ページ
 //---------------------------------
+Route::model('admin/*','Admin');
 Route::controller("admin","AdminController");
-
-Route::when('admin/*','admin');
+//Route::when('admin/*','admin');
 
 /*
 |---------------------------------------------

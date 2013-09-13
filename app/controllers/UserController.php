@@ -8,10 +8,8 @@ class UserController extends BaseController{
 	*/
 	public function __construct(){
 		//authフィルター
+		Config::set('auth.table', 'users');
 		$this->beforeFilter('auth',array('except'=>array('getLogin','postLogin')));
-		//,array(
-		//フィルター適用の指定
-		//'only'=>array('getIndex')));
 		//全POSTにcsrfフィルターの適用
 		$this->beforeFilter('csrf',array('on'=>'post'));
 	}
@@ -34,9 +32,6 @@ class UserController extends BaseController{
 	|-----------------------------------
 	| 新規作成
 	|-----------------------------------
-	| 1.GETでビューの表示
-	| 2.POSTでユーザー仮登録
-	| 3.仮登録後、アクティベートメールの送信
 	*/
 	//GETの処理
 		public function getCreate(){
@@ -70,6 +65,9 @@ class UserController extends BaseController{
 
 
 	public function getLogin(){
+		$name = Route::currentRouteAction();
+		$name = mb_substr($name, 0, mb_strpos($name,"@"));
+		echo $name;
 		return View::make("user/login");
 	}
 
@@ -93,11 +91,6 @@ class UserController extends BaseController{
 			->withInput();
 		}
 
-		//$email = "syoutarou@terada.name";
-		//$password = "1234";
-
-		//ログイン認証
-		//$inputs['activate'] = 1;
 		if(Auth::attempt($inputs)){
 			return Redirect::intended('user');
 			//return "ログイン完了！";
@@ -117,6 +110,9 @@ class UserController extends BaseController{
 	}
 	
 	public function getTest(){
+		$name = Route::currentRouteAction();
+		$name = mb_substr($name, 0, mb_strpos($name,"@"));
+		echo $name;
 		echo $html = HTML::link('admin/test','管理者ページ');
 		return "公開側専用ページになります。";
 	}

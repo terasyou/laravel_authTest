@@ -1,7 +1,18 @@
 <?php
 
-$model = "Admin";
-$table = "admins";
+
+//$name = Route::currentRouteName();
+/*
+if($name == "get admin/*"){
+	$model = "Admin";
+	$table = "admins";
+}else{
+	echo "userのテーブル";
+	$model = "User";
+	$table = "users";
+}
+*/
+
 
 return array(
 
@@ -18,7 +29,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'eloquent',
+	'driver' => 'database',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -31,7 +42,7 @@ return array(
 	|
 	*/
 
-	'model' => 'User',
+	'model' => 'Admin',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,3 +78,5 @@ return array(
  
 
 );
+
+	

@@ -8,10 +8,8 @@ class AdminController extends BaseController{
 	*/
 	public function __construct(){
 		//authフィルター
-		$this->beforeFilter('auth-admin',array('except'=>array('getLogin','postLogin')));
-		//,array(
-		//フィルター適用の指定
-		//'only'=>array('getIndex')));
+		Config::set('auth.table', 'admins');
+		$this->beforeFilter('admin',array('except'=>array('getLogin','postLogin')));
 		//全POSTにcsrfフィルターの適用
 		$this->beforeFilter('csrf',array('on'=>'post'));
 	}
@@ -21,25 +19,20 @@ class AdminController extends BaseController{
 	|------------------------------------
 	*/
 	public function getIndex(){
-		echo 'ようこそ'.Auth::admin()->name.'さん<br>';
+		echo 'ようこそ'.Auth::user()->name.'さん<br>';
 		echo '<h1>ユーザーのTOPページです。</h1>';
 		echo '<ul>';
 		echo '<li>'.HTML::link('/','サイトのTOP').'</li>';
 		echo '<li>'.HTML::link('admin/logout','ログアウト').'</li>';
 		echo '</ul>';
-
-		echo $name = Route::currentRouteName();
 	}
 	/*
 	|-----------------------------------
 	| 新規作成
 	|-----------------------------------
-	| 1.GETでビューの表示
-	| 2.POSTでユーザー仮登録
-	| 3.仮登録後、アクティベートメールの送信
 	*/
 	//GETの処理
-		public function getCreate(){
+	public function getCreate(){
 		return View::make('admin/create');
 	}
 	//POSTの処理
@@ -73,7 +66,11 @@ class AdminController extends BaseController{
 	//---------------------------------
 
 	public function getLogin(){
+		$name = Route::currentRouteAction();
+		$name = mb_substr($name, 0, mb_strpos($name,"@"));
+		echo $name;
 		return View::make("admin/login");
+
 	}
 	public function postLogin(){
 		//受信データの整理
@@ -94,7 +91,7 @@ class AdminController extends BaseController{
 		}
 
 		//ログイン認証
-		$inputs['activate']=1;
+		//$inputs['activate']=1;
 		if(Auth::attempt($inputs)){
 			return Redirect::intended('admin');
 		}else{
@@ -114,8 +111,11 @@ class AdminController extends BaseController{
 
 	public function getTest(){
 		echo $html = HTML::link('user/test','公開ページ');
+		$name = Route::currentRouteAction();
+		$name = mb_substr($name, 0, mb_strpos($name,"@"));
+		echo $name;
+
 		return "管理側専用ページになります。";
-		echo $name = Route::currentRouteName();
 	}
 }
 

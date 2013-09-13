@@ -34,36 +34,22 @@ App::after(function($request, $response)
 */
 
 Route::filter('auth', function(){
+
 	if (Auth::guest()){
 		return Redirect::guest("user/login");
-	}else{
+	}
+		/*公開側でさらに個別で認証を行う際も利用
 		$role = Auth::user()->role_id;
 		if($role == "1"){
 			return Redirect::guest("user/login");
-		}
-	}
+		}*/
 });
 
 Route::filter('admin', function(){
 	if (Auth::guest()){
 		return Redirect::guest("admin/login");
-	}else{
-		$role = Auth::user()->role_id;
-		if($role == "2"){
-			return Redirect::guest("admin/login");
-		}
 	}
 });
-
-
-
-
-/*
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::guest('login');
-});
-*/
 
 Route::filter('auth.basic', function()
 {
