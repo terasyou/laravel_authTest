@@ -9,6 +9,7 @@ class AdminController extends BaseController{
 	public function __construct(){
 		//authフィルター
 		Config::set('auth.table', 'admins');
+		Config::set('auth.model', 'Admin');
 		$this->beforeFilter('admin',array('except'=>array('getLogin','postLogin')));
 		//全POSTにcsrfフィルターの適用
 		$this->beforeFilter('csrf',array('on'=>'post'));
@@ -18,13 +19,11 @@ class AdminController extends BaseController{
 	| TOPページ（authフィルターの適用）
 	|------------------------------------
 	*/
-	public function getIndex(){
-		echo 'ようこそ'.Auth::user()->name.'さん<br>';
-		echo '<h1>ユーザーのTOPページです。</h1>';
-		echo '<ul>';
-		echo '<li>'.HTML::link('/','サイトのTOP').'</li>';
-		echo '<li>'.HTML::link('admin/logout','ログアウト').'</li>';
-		echo '</ul>';
+	public function getIndex()
+	{
+		$data['name'] = Auth::user()->name;
+		$data['email'] = Auth::user()->email;
+		return View::make("admin",$data);
 	}
 	/*
 	|-----------------------------------

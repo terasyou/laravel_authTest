@@ -18,23 +18,20 @@ class UserController extends BaseController{
 	| TOPページ（authフィルターの適用）
 	|------------------------------------
 	*/
-	public function getIndex(){
-		echo 'ようこそ'.Auth::user()->name.'さん<br>';
-		echo '<h1>ユーザーのTOPページです。</h1>';
-		echo '<ul>';
-		echo '<li>'.HTML::link('/','サイトのTOP').'</li>';
-		echo '<li>'.HTML::link('user/logout','ログアウト').'</li>';
-		echo '</ul>';
-		echo $email = Auth::user()->email;
-		echo $name = Route::currentRouteName();
+	public function getIndex()
+	{
+		$data['name'] = Auth::user()->name;
+		$data['email'] = Auth::user()->email;
+		return View::make("user",$data);
 	}
 	/*
 	|-----------------------------------
 	| 新規作成
 	|-----------------------------------
 	*/
+
 	//GETの処理
-		public function getCreate(){
+	public function getCreate(){
 		return View::make('user/create');
 	}
 	//POSTの処理
