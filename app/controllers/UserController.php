@@ -60,7 +60,9 @@ class UserController extends BaseController{
 		return $user->name.'さん。<br>登録完了です。';
 	}
 
-
+	//---------------------------------
+	//ログイン処理
+	//---------------------------------
 	public function getLogin(){
 		$name = Route::currentRouteAction();
 		$name = mb_substr($name, 0, mb_strpos($name,"@"));
