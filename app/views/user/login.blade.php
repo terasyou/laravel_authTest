@@ -21,12 +21,12 @@
 {{ Form::label('email','メール') }}
 {{ Form::text('email',Input::old('email','')) }}<br>
 @if($errors->has('email'))
-<h4 style="color:red;text-align:center">{{ $errors->first('email') }}</h4>
+<span style="color:red;">{{ $errors->first('email') }}</span>
 @endif
 {{ Form::label('password','パスワード') }}
 {{ Form::password('password') }}<br>
 @if($errors->has('password'))
-<h4 style="color:red;text-align:center">{{ $errors->first('password') }}</h4>
+<span style="color:red;">{{ $errors->first('password') }}</span><br>
 @endif
 {{ Form::token() }}
 {{ Form::submit('ログイン',array('class'=>'btn btn-success')) }}
