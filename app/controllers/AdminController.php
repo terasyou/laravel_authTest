@@ -23,6 +23,8 @@ class AdminController extends BaseController{
 	{
 		$data['name'] = Auth::user()->name;
 		$data['email'] = Auth::user()->email;
+		//ユーザ一覧取得
+		$data['users']=User::orderBy('id','desc')->paginate(10);
 		return View::make("admin",$data);
 	}
 	/*
@@ -65,11 +67,8 @@ class AdminController extends BaseController{
 	//---------------------------------
 
 	public function getLogin(){
-		$name = Route::currentRouteAction();
-		$name = mb_substr($name, 0, mb_strpos($name,"@"));
-		echo $name;
-		return View::make("admin/login");
-
+		$data["error"] = "";
+		return View::make("admin/login",$data);
 	}
 	public function postLogin(){
 		//受信データの整理
@@ -94,7 +93,8 @@ class AdminController extends BaseController{
 		if(Auth::attempt($inputs)){
 			return Redirect::intended('admin');
 		}else{
-			return "ログイン出来ませんでした";
+			$data["error"] = "メールアドレスかパスワードが間違っています。";
+			return  View::make('admin/login',$data);
 		}
 	}
 

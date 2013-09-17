@@ -64,10 +64,8 @@ class UserController extends BaseController{
 	//ログイン処理
 	//---------------------------------
 	public function getLogin(){
-		$name = Route::currentRouteAction();
-		$name = mb_substr($name, 0, mb_strpos($name,"@"));
-		echo $name;
-		return View::make("user/login");
+		$data["error"] = "";
+		return View::make("user/login",$data);
 	}
 
 	public function postLogin(){
@@ -94,7 +92,8 @@ class UserController extends BaseController{
 			return Redirect::intended('user');
 			//return "ログイン完了！";
 		}else{
-			return "ログイン出来ませんでした";
+			$data["error"] = "メールアドレスかパスワードが間違っています。";
+			return  View::make('user/login',$data);
 		}
 	}
 

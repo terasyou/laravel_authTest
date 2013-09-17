@@ -26,7 +26,7 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span4">
-    	{{ HTML::image('img/1.jpg',"test1") }}
+    	{{ HTML::image('img/1.jpg',"test1", array('class' => 'img-polaroid','width' =>"240",'height' => "240")) }}
       <h2>span4</h2>
       <p>画面上を16カラムで分割されていて、そこをどう使うかでレイアウトしていく感じ。
 		ちょっと使った感じ開発の時にはかなり使いやすい！！
@@ -35,7 +35,7 @@
 		ぱっと見た感じはどうしても twitter っぽくはなるのは諦めるしかないｗ</p>
     </div>
 	<div class="span4">
-		{{ HTML::image('img/2.jpg',"test1") }}
+		{{ HTML::image('img/2.jpg',"test1", array('class' => 'img-polaroid','width' =>"240",'height' => "240")) }}
       <h2>span4</h2>
       <p>画面上を16カラムで分割されていて、そこをどう使うかでレイアウトしていく感じ。
 		ちょっと使った感じ開発の時にはかなり使いやすい！！
@@ -45,7 +45,7 @@
     </div>
 
     <div class="span4">
-   	  {{ HTML::image('img/3.jpg',"test1") }}
+   	  {{ HTML::image('img/3.jpg',"test1", array('class' => 'img-polaroid','width' =>"240",'height' => "240")) }}
       <h2>span4</h2>
       <p>画面上を16カラムで分割されていて、そこをどう使うかでレイアウトしていく感じ。
 		ちょっと使った感じ開発の時にはかなり使いやすい！！
