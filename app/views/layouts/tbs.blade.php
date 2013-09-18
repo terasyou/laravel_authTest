@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,minimum-scale=1">
 {{ Html::style('tbs/css/bootstrap.min.css') }}
 {{ Html::style('tbs/css/bootstrap-responsive.min.css') }}
+{{ Html::style('tbs/css/bootstrap-custom.css') }}
 @section('header')
 <title>Laravel4</title>
 @show

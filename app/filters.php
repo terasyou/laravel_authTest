@@ -38,11 +38,6 @@ Route::filter('auth', function(){
 	if (Auth::guest()){
 		return Redirect::guest("user/login");
 	}
-		/*公開側でさらに個別で認証を行う際も利用
-		$role = Auth::user()->role_id;
-		if($role == "1"){
-			return Redirect::guest("user/login");
-		}*/
 });
 
 Route::filter('admin', function(){
