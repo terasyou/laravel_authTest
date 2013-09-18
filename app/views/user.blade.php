@@ -5,8 +5,8 @@
 @section('nav')
 @parent
 <li>{{ HTML::link('user/logout','Logout') }}</li>
-<li>{{ HTML::link('user/test','Page') }}</li>
-<li>{{ HTML::link('user/test','Page') }}</li>
+<li>{{ HTML::link('user/test','Profile') }}</li>
+<li>{{ HTML::link('user/file','Upload') }}</li>
 @stop
 @section('content')
 <div class="container hero-unit">

@@ -29,7 +29,6 @@ class UserController extends BaseController{
 	| 新規作成
 	|-----------------------------------
 	*/
-
 	//GETの処理
 	public function getCreate(){
 		return View::make('user/create');
@@ -56,7 +55,6 @@ class UserController extends BaseController{
 		//ユーザーの新規作成
 		$inputs['onepass']=md5(Input::get('name').time());
 		$user=User::create($inputs);
-
 		return $user->name.'さん。<br>登録完了です。';
 	}
 
@@ -107,6 +105,9 @@ class UserController extends BaseController{
 		return Redirect::to('/');
 	}
 	
+	//---------------------------------
+	//テストページ
+	//---------------------------------
 	public function getTest(){
 		$name = Route::currentRouteAction();
 		$name = mb_substr($name, 0, mb_strpos($name,"@"));
@@ -114,7 +115,54 @@ class UserController extends BaseController{
 		echo $html = HTML::link('admin/test','管理者ページ');
 		return "公開側専用ページになります。";
 	}
-	
+
+	//---------------------------------
+	//写真のアップロード機能
+	//---------------------------------
+	public function getFile(){
+		$data["file_name"] = "";
+		$data["mes"] = "";
+		return View::make("user/file",$data);
+	}
+
+	public function postFile(){
+		$user_name = Auth::user()->name;
+		$set_path = public_path('images/'.$user_name.'/');
+
+		// ディレクトリは存在するか確認
+		if(!File::exists($set_path))
+		{
+		    File::makeDirectory($set_path);
+		}
+
+		// ファイルは入力されたか
+		if(!Input::hasFile('image'))
+		{
+			$data["file_name"] = "";
+		    $data["mes"] = "ファイルがありません";
+			return View::make("user/file",$data);
+		}
+		
+
+		$file = Input::file("image");
+
+		// 情報を取得
+		$file_path = $file->getRealPath();
+		$name = $file->getClientOriginalName();
+
+		// ファイルをtmpから移動
+		File::move($file_path, $set_path.$name);
+
+		// 以降は。。。。
+
+		//ビューに完了メッセージを渡す
+		$data["file_name"] = $name;
+		$data["mes"] = "アップロードが完了しました。";
+		return View::make("user/file",$data);
+	}
+
+
+
 
 }
 

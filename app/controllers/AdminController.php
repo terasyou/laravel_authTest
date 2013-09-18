@@ -116,6 +116,7 @@ class AdminController extends BaseController{
 
 		return "管理側専用ページになります。";
 	}
+
 }
 
 
